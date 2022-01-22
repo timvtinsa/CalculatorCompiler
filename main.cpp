@@ -1,18 +1,30 @@
 #include <iostream>
-#include "lexer.h"
+#include "Lexer.h"
+#include "Automate.h"
 
 
 int main(void) {
-   string chaine("(1+34)*123");
 
-   Lexer l(chaine);
+//----------- OLD MAIN ------------
+//   string chaine("(1+34)*123");
+//
+//   Lexer l(chaine);
+//
+//   Symbole * s;
+//   while(*(s=l.Consulter())!=FIN) {
+//      s->Affiche();
+//      cout<<endl;
+//      l.Avancer();
+//   }
 
-   Symbole * s;
-   while(*(s=l.Consulter())!=FIN) {
-      s->Affiche();
-      cout<<endl;
-      l.Avancer();
-   }
+//----------- NEW MAIN -----------
+    string input;
+
+    cout << "Entrez l'expression arithmétique :" << endl;
+    cin >> input;
+    Automate *automate = new Automate(input);
+    automate->run();
+
    return 0;
 }
 
