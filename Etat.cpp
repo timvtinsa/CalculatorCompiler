@@ -3,6 +3,7 @@
 //
 
 #include <string>
+#include <iostream>
 #include "Etat.h"
 #include "Symbole.h"
 
@@ -11,7 +12,7 @@ Etat::Etat(string name) {
 }
 
 void Etat::print() const {
-
+    cout << "State : " << name << "; " << endl;
 }
 
 Etat::~Etat() {

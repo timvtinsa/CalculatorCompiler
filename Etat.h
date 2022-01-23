@@ -45,10 +45,9 @@ protected:
 
 // Déclaration des différents états issus de la classe abstraite Etat
 
-// Déclaration de la classe correspondant à l'état E0
+//--------------------------------------------- Définition de la classe E0
 class E0 : public Etat {
 
-//----------------------------------------------------------------- PUBLIC
 public:
 //----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s);
@@ -58,85 +57,110 @@ public:
 };
 
 
-// Déclaration de la classe correspondant à l'état E1
+//--------------------------------------------- Définition de la classe E1
 class E1 : public Etat {
 
 public:
-    E1();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E1();
 };
 
+
+//--------------------------------------------- Définition de la classe E2
 class E2 : public Etat {
 
 public:
-
-    E2();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E2();
 };
 
+
+//--------------------------------------------- Définition de la classe E3
 class E3 : public Etat {
 
 public:
-
-    E3();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E3();
 };
 
+
+//--------------------------------------------- Définition de la classe E4
 class E4 : public Etat {
 
 public:
-
-    E4();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E4();
 };
 
+
+//--------------------------------------------- Définition de la classe E5
 class E5 : public Etat {
 
 public:
-
-    E5();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E5();
 };
 
+
+//--------------------------------------------- Définition de la classe E6
 class E6 : public Etat {
 
 public:
-
-    E6();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E6();
 };
 
+//--------------------------------------------- Définition de la classe E7
 class E7 : public Etat {
 
 public:
-
-    E7();
-
+//-------------------------------------------- Constructeurs - destructeur
     bool transition(Automate &automate, Symbole *s) override;
+
+//----------------------------------------------------- Méthodes publiques
+    E7();
 };
 
+
+//--------------------------------------------- Définition de la classe E8
 class E8 : public Etat {
 
 public:
-
-    E8();
-
+//-------------------------------------------- Constructeurs - destructeur
     bool transition(Automate &automate, Symbole *s) override;
+
+//----------------------------------------------------- Méthodes publiques
+    E8();
 };
 
+
+//--------------------------------------------- Définition de la classe E9
 class E9 : public Etat {
 
 public:
-
-    E9();
-
+//----------------------------------------------------- Méthodes publiques
     bool transition(Automate &automate, Symbole *s) override;
+
+//-------------------------------------------- Constructeurs - destructeur
+    E9();
 };
 
 

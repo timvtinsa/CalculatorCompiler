@@ -15,17 +15,7 @@ using namespace std;
 #include "Etat.h"
 #include "Expression.h"
 
-//----------------------------------------------------- Méthodes publiques
-
-Automate::Automate(string input) {
-    this->lexer = new Lexer(move(input));
-    E0 * initState = new E0();
-    stateStack.push(initState);
-}
-
-Automate::Automate(const Automate &Automate) { }
-
-Automate::~Automate() { }
+//------------------------------------------ Automate - Méthodes publiques
 
 void Automate::decalage(Symbole *s, Etat *e) {
     symbolStack.push(s);
@@ -44,31 +34,36 @@ void Automate::reduction(int n, Symbole *s) {
         aEnlever.push(symbolStack.top());
         symbolStack.pop();
     }
-    stateStack.top()->transition(*this, s);
 
-    int operand1 = *aEnlever.top();
-    ExpressionBinaire * expr;
-
-    if (n == 3) {
-        if (operand1 == OPENPAR) {
+    Expression *expr = nullptr;
+    if (n == 1)
+    {
+        expr = new Entier(aEnlever.top()->eval());
+    }
+    else if (n == 3)
+    {
+        if (*aEnlever.top() == OPENPAR)
+        {
             aEnlever.pop();
-            operand1 = *aEnlever.top();
-        } else {
+            expr = new Entier(aEnlever.top()->eval());
+        } else
+        {
+            auto * operand1 = new Entier(aEnlever.top()->eval());
             aEnlever.pop();
             int operatorSymbol = *aEnlever.top();
             aEnlever.pop();
-            int operand2 = *aEnlever.top();
+            auto * operand2 = new Entier((*aEnlever.top()).eval());
             switch (operatorSymbol) {
                 case MULT:
-                    expr = new ExpressionMult(operand1,operand2);
+                    expr = new ExpressionMult(*operand1,*operand2);
 //                    operand1 = operand1 * operand2;
-                break;
+                    break;
                 case PLUS:
-                    expr = new ExpressionPlus(operand1,operand2);
+                    expr = new ExpressionPlus(*operand1,*operand2);
 //                    operand1 = operand1 + operand2;
-                break;
+                    break;
                 default:
-                    cout << "Erreur lors de l'évalutation de l'expression" << endl;
+                    cout << "Erreur lors de la création l'expression binaire" << endl;
             }
         }
     }
@@ -81,17 +76,45 @@ void Automate::run() {
     bool nextState = true;
 
     while (nextState) {
+        stateStack.top()->print();
         Symbole *s = lexer->Consulter();
         lexer->Avancer();
         nextState = stateStack.top()->transition(*this, s);
     }
     if (*symbolStack.top() != ERREUR) {
-
-        int resultat = symbolStack.top()->getValue();
+        int resultat = (*symbolStack.top()).eval();
         cout << "Syntaxe correct" << endl << "Résultat : " << resultat << endl;
     } else {
         cout << "Syntaxe non reconnu : caractere invalide" << endl;
     }
 }
 
+
+
+//---------------------------------- Symbole - Constructeurs - destructeur
+Automate::Automate(string input)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Automate>" << endl;
+#endif
+    this->lexer = new Lexer(move(input));
+    E0 * initState = new E0();
+    stateStack.push(initState);
+}
+
+Automate::~Automate()
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Automate>" << endl;
+#endif
+    delete (lexer);
+    while (!stateStack.empty()) {
+        delete (stateStack.top());
+        stateStack.pop();
+    }
+    while (!symbolStack.empty()) {
+        delete (symbolStack.top());
+        symbolStack.pop();
+    }
+}
 

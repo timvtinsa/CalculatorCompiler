@@ -15,39 +15,33 @@ void Symbole::Affiche()
     cout<<Etiquettes[ident];
 }
 
+int Symbole::eval() {
+    return -1;
+}
+
+
 //---------------------------------- Symbole - Constructeurs - destructeur
 Symbole::Symbole(const Symbole & aSymbole)
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <Symbole>" << endl;
-    #endif
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Symbole>" << endl;
+#endif
 }
 
 Symbole::~Symbole()
 {
-    #ifdef MAP
-        cout << "Appel au destructeur de <Symbole>" << endl;
-    #endif
+#ifdef MAP
+    cout << "Appel au destructeur de <Symbole>" << endl;
+#endif
 }
 
-//------------------------------------------- Symbole - Méthodes publiques
-void Entier::Affiche() {
-    Symbole::Affiche();
-    cout<<"("<<valeur<<")";
+
+//---------------------------- SymboleSimple - Constructeurs - destructeur
+
+EntierSimple::~EntierSimple() {
+
 }
 
-//----------------------------------- Entier - Constructeurs - destructeur
-Entier::Entier(const Symbole &aSymbole, const Entier &aEntier) : Symbole(aSymbole)
-{
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <Entier>" << endl;
-    #endif
+int EntierSimple::eval() {
+    return valeur;
 }
-
-Entier::~Entier()
-{
-    #ifdef MAP
-        cout << "Appel au destructeur de <Entier>" << endl;
-    #endif
-}
-

@@ -3,22 +3,34 @@
                              -------------------
 *************************************************************************/
 //-------------------------------------------------------- Include système
+#include <iostream>
+
 //------------------------------------------------------ Include personnel
 #include "Expression.h"
 
 //----------------------------- Expression --- Constructeurs - destructeur
-
-Expression::Expression(const Symbole &aSymbole, const Expression &anExpression) : Symbole(aSymbole)
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Expression>" << endl;
-#endif
-}
-
 Expression::~Expression()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Expression>" << endl;
+#endif
+}
+
+//------------------------------------------- Symbole - Méthodes publiques
+void Entier::Affiche() {
+    Symbole::Affiche();
+    cout<<"("<<valeur<<")";
+}
+
+int Entier::eval() {
+    return valeur;
+}
+
+//----------------------------------- Entier - Constructeurs - destructeur
+Entier::~Entier()
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Entier>" << endl;
 #endif
 }
 
@@ -51,10 +63,8 @@ ExpressionPlus::~ExpressionPlus()
 //------------------------------------ ExpressionPlus - Méthodes publiques
 int ExpressionPlus::eval()
 {
-    return this->operand1 + this->operand2;
+    return operand1.eval() + operand2.eval();
 }
-
-
 
 //------------------------- ExpressionMult --- Constructeurs - destructeur
 ExpressionMult::~ExpressionMult()
@@ -67,8 +77,10 @@ ExpressionMult::~ExpressionMult()
 //------------------------------------ ExpressionMult - Méthodes publiques
 int ExpressionMult::eval()
 {
-    return this->operand1 * this->operand2;
+    return operand1.eval() * operand2.eval();
 }
+
+
 
 
 

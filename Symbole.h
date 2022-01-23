@@ -24,6 +24,8 @@ public:
 //----------------------------------------------------- Méthodes publiques
     virtual void Affiche();
 
+    virtual int eval();
+
     bool isTerminal() const { return terminal; }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -36,9 +38,9 @@ public:
     Symbole(int i, bool t) : ident(i), terminal(t)
     // Mode d'emploi : Constructeur
     {
-        #ifdef MAP
-            cout << "Appel au constructeur de <Symbole>" << endl;
-        #endif
+#ifdef MAP
+    cout << "Appel au constructeur de <Symbole>" << endl;
+#endif
     };
 
     virtual ~Symbole();
@@ -51,26 +53,26 @@ protected:
 };
 
 
-//---------------------------------------- Définition de la classe Entier
-class Entier : public Symbole {
+//---------------------------------- Définition de la classe SymboleSimple
+class EntierSimple : public Symbole {
 public:
+//----------------------------------------------------- Méthodes publiques
+    virtual int eval();
+
 //-------------------------------------------- Constructeurs - destructeur
-    Entier(const Symbole &sSymbole, const Entier &aEntier);
+    EntierSimple (const EntierSimple & aEntierSimple );
     // Mode d'emploi  : Constructeur de copie
 
-    explicit Entier(int val) : Symbole(INT, false), valeur(val)
+    EntierSimple(int val) : Symbole(INT, true), valeur(val)
+    // Mode d'emploi : Constructeur
     {
-        #ifdef MAP
-                cout << "Appel au constructeur de <Entier>" << endl;
-        #endif
-    }
-    // Mode d'emploi  : Constructeur
+#ifdef MAP
+        cout << "Appel au constructeur de <Symbole>" << endl;
+#endif
+    };
 
-    virtual ~Entier();
+    virtual ~EntierSimple();
     // Mode d'emploi : Destructeur
-
-//----------------------------------------------------- Méthodes publiques
-    virtual void Affiche();
 
 protected:
 //----------------------------------------------------- Attributs protégés

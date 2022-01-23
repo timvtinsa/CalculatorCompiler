@@ -1,5 +1,14 @@
-#include "Lexer.h"
+/*************************************************************************
+                          Lexer.cpp  -  Implémentation
+                             -------------------
+*************************************************************************/
 
+//-------------------------------------------------------- Include système
+//------------------------------------------------------ Include personnel
+#include "Lexer.h"
+#include "Expression.h"
+
+//--------------------------------------------- Lexer - Méthodes publiques
 Symbole * Lexer::Consulter() {
    if (!tampon) {
 
@@ -10,19 +19,19 @@ Symbole * Lexer::Consulter() {
 
          switch (flux[tete]) {
             case '(':
-               tampon = new Symbole(OPENPAR, false);
+               tampon = new Symbole(OPENPAR, true);
                tete++;
                break;
             case ')':
-               tampon = new Symbole(CLOSEPAR, false);
+               tampon = new Symbole(CLOSEPAR, true);
                tete++;
                break;
             case '*':
-               tampon = new Symbole(MULT, false);
+               tampon = new Symbole(MULT, true);
                tete++;
                break;
             case '+':
-               tampon = new Symbole(PLUS, false );
+               tampon = new Symbole(PLUS, true );
                tete++;
                break;
             default:
@@ -34,7 +43,7 @@ Symbole * Lexer::Consulter() {
                      i++;
                   }
                   tete = tete+i;
-                  tampon = new Entier(resultat);
+                  tampon = new EntierSimple(resultat);
                }
                else {
                   tampon = new Symbole(ERREUR, true);
@@ -47,5 +56,33 @@ Symbole * Lexer::Consulter() {
 
 void Lexer::Avancer() {
    tampon = nullptr;
+}
+
+void Lexer::putSymbol(Symbole *s) {
+
+    switch (*s) {
+        case PLUS:
+        case MULT:
+        case OPENPAR:
+        case CLOSEPAR:
+            tampon = s;
+            break;
+    }
+}
+
+//------------------------------------ Lexer - Constructeurs - destructeur
+Lexer::Lexer(const Lexer &aLexer)
+{
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Lexer>" << endl;
+    #endif
+}
+
+Lexer::~Lexer()
+{
+    #ifdef MAP
+        cout << "Appel au destructeur de <Lexer>" << endl;
+    #endif
+    delete(tampon);
 }
 

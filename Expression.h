@@ -22,11 +22,18 @@ public:
 
     Expression() : Symbole(EXPR, false)
     {
-        #ifdef MAP
-                cout << "Appel au constructeur de <Expression>" << endl;
-        #endif
+#ifdef MAP
+        cout << "Appel au constructeur de <Expression>" << endl;
+#endif
     }
     // Mode d'emploi  : Constructeur
+
+    Expression(Identificateurs id, bool isTerminal) : Symbole(id, isTerminal)
+    {
+#ifdef MAP
+        cout << "Appel au constructeur de <Expression>" << endl;
+#endif
+    }
 
     virtual ~Expression();
     // Mode d'emploi : Destructeur
@@ -35,22 +42,47 @@ public:
     virtual int eval() = 0;
 };
 
+//---------------------------------------- Définition de la classe Entier
+class Entier : public Expression {
+public:
+//-------------------------------------------- Constructeurs - destructeur
+    Entier(const Symbole &sSymbole, const Entier &aEntier);
+    // Mode d'emploi  : Constructeur de copie
+
+    explicit Entier(int val) : Expression(), valeur(val)
+    {
+#ifdef MAP
+        cout << "Appel au constructeur de <Entier>" << endl;
+#endif
+    }
+    // Mode d'emploi  : Constructeur
+
+    virtual ~Entier();
+    // Mode d'emploi : Destructeur
+
+//----------------------------------------------------- Méthodes publiques
+    virtual void Affiche();
+
+    virtual int eval();
+
+protected:
+//----------------------------------------------------- Attributs protégés
+    int valeur;
+};
+
 
 //------------------------------ Définition de la classe ExpressionBinaire
 class ExpressionBinaire : public Expression {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    ExpressionBinaire(const ExpressionBinaire &abExpressionBinaire);
+    ExpressionBinaire(const ExpressionBinaire &anExpressionBinaire);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionBinaire();
-    // Mode d'emploi  : Constructeur par défault
-
-    ExpressionBinaire(Identificateurs opSymbol, const Entier& opd1, const Entier& opd2) : Expression(), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
+    ExpressionBinaire(Identificateurs opSymbol, const Entier& opd1, const Entier& opd2) : Expression(EXPR,false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
     {
-        #ifdef MAP
-                cout << "Appel au constructeur de <ExpressionBinaire>" << endl;
-        #endif
+#ifdef MAP
+        cout << "Appel au constructeur de <ExpressionBinaire>" << endl;
+#endif
     }
     // Mode d'emploi  : Constructeur
 
@@ -58,22 +90,22 @@ public:
     // Mode d'emploi  : Destructeur
 
 //----------------------------------------------------- Méthodes publiques
-    int eval() override;
+    virtual int eval() = 0;
 
 protected:
-    int operatorSymbole;
-    int operand1;
-    int operand2;
+    Identificateurs operatorSymbole;
+    Entier operand1;
+    Entier operand2;
 };
 
 //--------------------------------- Définition de la classe ExpressionPlus
 class ExpressionPlus : public ExpressionBinaire {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    ExpressionPlus(const ExpressionPlus &anExpressionPlus);
+    ExpressionPlus(const ExpressionBinaire &anExpressionBinaire);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionPlus(Entier opd1, Entier opd2) : ExpressionBinaire(PLUS, opd1, opd2)
+    ExpressionPlus(Entier & opd1, Entier & opd2) : ExpressionBinaire(PLUS, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionPlus>" << endl;
@@ -94,7 +126,7 @@ public:
     ExpressionMult(const ExpressionMult &anExpressionMult);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionMult(Entier opd1, Entier opd2) : ExpressionBinaire(MULT, opd1, opd2)
+    ExpressionMult(Entier & opd1, Entier & opd2) : ExpressionBinaire(MULT, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionMult>" << endl;

@@ -1,20 +1,43 @@
+/*************************************************************************
+               Lexer.h  - Interface de la classe Lexer
+                         -------------------
+*************************************************************************/
+
+//---------- Interface de la classe <Lexer> (fichier Lexer.h) ----------------
 #pragma once
 
-#include <string>
-#include "Symbole.h"
+//--------------------------------------------------- Interfaces utilisées
 using namespace std;
+#include <string>
+#include <utility>
+#include "Symbole.h"
 
+//------------------------------------------ Définition de la classe Lexer
 class Lexer {
 
-   public:
-      Lexer(string s) : flux(s), tete(0), tampon(nullptr) { }
-      ~Lexer() { }
+public:
 
-      Symbole * Consulter();
-      void Avancer();
+//-------------------------------------------- Constructeurs - destructeur
+    Lexer(const Lexer &aLexer);
 
-   protected:
-      string flux;
-      int tete;
-      Symbole * tampon;
+    explicit Lexer(string s) : flux(move(s)), tete(0), tampon(nullptr) {
+        #ifdef MAP
+                cout << "Appel au constructeur de <Lexer>" << endl;
+        #endif
+    }
+
+    void putSymbol(Symbole *s);
+
+    virtual ~Lexer();
+
+//----------------------------------------------------- Méthodes publiques
+
+    Symbole *Consulter();
+
+    void Avancer();
+
+protected:
+    string flux;
+    int tete;
+    Symbole *tampon;
 };
