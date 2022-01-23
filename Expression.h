@@ -35,7 +35,7 @@ public:
 #endif
     }
 
-    virtual ~Expression();
+    ~Expression() override;
     // Mode d'emploi : Destructeur
 
 //----------------------------------------------------- Méthodes publiques
@@ -57,7 +57,7 @@ public:
     }
     // Mode d'emploi  : Constructeur
 
-    virtual ~Entier();
+    ~Entier() override;
     // Mode d'emploi : Destructeur
 
 //----------------------------------------------------- Méthodes publiques
@@ -78,7 +78,7 @@ public:
     ExpressionBinaire(const ExpressionBinaire &anExpressionBinaire);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionBinaire(Identificateurs opSymbol, const Entier& opd1, const Entier& opd2) : Expression(EXPR,false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
+    ExpressionBinaire(Identificateurs opSymbol, Entier* opd1, Entier* opd2) : Expression(EXPR,false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
     {
 #ifdef MAP
         cout << "Appel au constructeur de <ExpressionBinaire>" << endl;
@@ -86,7 +86,7 @@ public:
     }
     // Mode d'emploi  : Constructeur
 
-    virtual ~ExpressionBinaire();
+    ~ExpressionBinaire() override;
     // Mode d'emploi  : Destructeur
 
 //----------------------------------------------------- Méthodes publiques
@@ -94,8 +94,8 @@ public:
 
 protected:
     Identificateurs operatorSymbole;
-    Entier operand1;
-    Entier operand2;
+    Entier* operand1;
+    Entier* operand2;
 };
 
 //--------------------------------- Définition de la classe ExpressionPlus
@@ -105,7 +105,7 @@ public:
     ExpressionPlus(const ExpressionBinaire &anExpressionBinaire);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionPlus(Entier & opd1, Entier & opd2) : ExpressionBinaire(PLUS, opd1, opd2)
+    ExpressionPlus(Entier * opd1,  Entier * opd2) : ExpressionBinaire(PLUS, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionPlus>" << endl;
@@ -113,7 +113,7 @@ public:
     }
     // Mode d'emploi  : Constructeur
 
-    virtual ~ExpressionPlus();
+    ~ExpressionPlus() override;
     // Mode d'emploi  : Destructeur
 //----------------------------------------------------- Méthodes publiques
     int eval() override;
@@ -126,14 +126,14 @@ public:
     ExpressionMult(const ExpressionMult &anExpressionMult);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionMult(Entier & opd1, Entier & opd2) : ExpressionBinaire(MULT, opd1, opd2)
+    ExpressionMult(Entier * opd1, Entier * opd2) : ExpressionBinaire(MULT, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionMult>" << endl;
         #endif
     }
     // Mode d'emploi  : Constructeur
-    virtual ~ExpressionMult();
+    ~ExpressionMult() override;
 //----------------------------------------------------- Méthodes publiques
     int eval() override;
 };

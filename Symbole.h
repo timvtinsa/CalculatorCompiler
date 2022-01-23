@@ -63,7 +63,7 @@ public:
     EntierSimple (const EntierSimple & aEntierSimple );
     // Mode d'emploi  : Constructeur de copie
 
-    EntierSimple(int val) : Symbole(INT, true), valeur(val)
+    explicit EntierSimple(int val) : Symbole(INT, true), valeur(val)
     // Mode d'emploi : Constructeur
     {
 #ifdef MAP
@@ -71,7 +71,7 @@ public:
 #endif
     };
 
-    virtual ~EntierSimple();
+    ~EntierSimple() override;
     // Mode d'emploi : Destructeur
 
 protected:

@@ -13,6 +13,7 @@ using namespace std;
 #include <stack>
 #include "Symbole.h"
 #include "Lexer.h"
+#include "Expression.h"
 
 class Etat;
 
@@ -33,13 +34,15 @@ public:
     Automate ( const Automate & Automate );
     // Mode d'emploi  : Constructeur de copie
 
-    Automate(string chaine);
+    explicit Automate(string chaine);
     // Mode d'emploi : Constructeur
 
     virtual ~Automate ( );
     // Mode d'emploi : Destructeur
 
 protected:
+//----------------------------------------------------- Méthodes protégées
+    static Expression* buildBinaryExpression( Entier * operand1,  Entier * operand2, const int & operatorId );
 //----------------------------------------------------- Attributs protégés
     StateStack stateStack;
     SymbolStack symbolStack;

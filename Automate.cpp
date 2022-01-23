@@ -14,6 +14,8 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Etat.h"
 #include "Expression.h"
+#include "Automate.h"
+
 
 //------------------------------------------ Automate - Méthodes publiques
 
@@ -24,6 +26,7 @@ void Automate::decalage(Symbole *s, Etat *e) {
         lexer->Avancer();
     }
 }
+
 
 void Automate::reduction(int n, Symbole *s) {
     SymbolStack aEnlever;
@@ -44,29 +47,25 @@ void Automate::reduction(int n, Symbole *s) {
     {
         if (*aEnlever.top() == OPENPAR)
         {
+            delete(aEnlever.top());
             aEnlever.pop();
             expr = new Entier(aEnlever.top()->eval());
+            delete(aEnlever.top());
+            aEnlever.pop();
         } else
         {
             auto * operand1 = new Entier(aEnlever.top()->eval());
+            delete(aEnlever.top());
             aEnlever.pop();
             int operatorSymbol = *aEnlever.top();
+            delete(aEnlever.top());
             aEnlever.pop();
             auto * operand2 = new Entier((*aEnlever.top()).eval());
-            switch (operatorSymbol) {
-                case MULT:
-                    expr = new ExpressionMult(*operand1,*operand2);
-//                    operand1 = operand1 * operand2;
-                    break;
-                case PLUS:
-                    expr = new ExpressionPlus(*operand1,*operand2);
-//                    operand1 = operand1 + operand2;
-                    break;
-                default:
-                    cout << "Erreur lors de la création l'expression binaire" << endl;
-            }
+            expr = buildBinaryExpression(operand1, operand2, operatorSymbol);
         }
     }
+    delete(aEnlever.top());
+    aEnlever.pop();
 
     stateStack.top()->transition(*this, expr);
     lexer->putSymbol(s);
@@ -76,22 +75,37 @@ void Automate::run() {
     bool nextState = true;
 
     while (nextState) {
+        //TODO Décommenter le debug une fois la config de lancement écrite
+//#ifdef SHOW_STATES_PATH
         stateStack.top()->print();
+//#endif
         Symbole *s = lexer->Consulter();
         lexer->Avancer();
         nextState = stateStack.top()->transition(*this, s);
     }
     if (*symbolStack.top() != ERREUR) {
         int resultat = (*symbolStack.top()).eval();
-        cout << "Syntaxe correct" << endl << "Résultat : " << resultat << endl;
+        cout << "Valid expression" << endl << "Evaluation result : " << resultat << endl;
     } else {
-        cout << "Syntaxe non reconnu : caractere invalide" << endl;
+        cout << "Invalid expression : syntax error." << endl;
+    }
+}
+
+Expression *
+Automate::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int &operatorId) {
+    switch (operatorId) {
+        case PLUS:
+            return new ExpressionPlus(operand1, operand2);
+        case MULT:
+            return new ExpressionMult(operand1,operand2);
+        default:
+            cout << "Erreur lors de la création l'expression binaire" << endl;
     }
 }
 
 
 
-//---------------------------------- Symbole - Constructeurs - destructeur
+//---------------------------------- Automate - Constructeurs - destructeur
 Automate::Automate(string input)
 {
 #ifdef MAP
@@ -117,4 +131,6 @@ Automate::~Automate()
         symbolStack.pop();
     }
 }
+
+
 

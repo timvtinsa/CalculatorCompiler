@@ -42,6 +42,8 @@ ExpressionBinaire::~ExpressionBinaire()
 #ifdef MAP
     cout << "Appel au destructeur de <ExpressionBinaire>" << endl;
 #endif
+    delete(operand1);
+    delete(operand2);
 }
 
 //------------------------------------ ExpressionBinaire - Méthodes publiques
@@ -63,7 +65,7 @@ ExpressionPlus::~ExpressionPlus()
 //------------------------------------ ExpressionPlus - Méthodes publiques
 int ExpressionPlus::eval()
 {
-    return operand1.eval() + operand2.eval();
+    return operand1->eval() + operand2->eval();
 }
 
 //------------------------- ExpressionMult --- Constructeurs - destructeur
@@ -77,7 +79,7 @@ ExpressionMult::~ExpressionMult()
 //------------------------------------ ExpressionMult - Méthodes publiques
 int ExpressionMult::eval()
 {
-    return operand1.eval() * operand2.eval();
+    return operand1->eval() * operand2->eval();
 }
 
 

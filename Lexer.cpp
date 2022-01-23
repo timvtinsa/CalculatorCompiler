@@ -6,7 +6,6 @@
 //-------------------------------------------------------- Include système
 //------------------------------------------------------ Include personnel
 #include "Lexer.h"
-#include "Expression.h"
 
 //--------------------------------------------- Lexer - Méthodes publiques
 Symbole * Lexer::Consulter() {
@@ -59,15 +58,7 @@ void Lexer::Avancer() {
 }
 
 void Lexer::putSymbol(Symbole *s) {
-
-    switch (*s) {
-        case PLUS:
-        case MULT:
-        case OPENPAR:
-        case CLOSEPAR:
-            tampon = s;
-            break;
-    }
+    tampon = s;
 }
 
 //------------------------------------ Lexer - Constructeurs - destructeur

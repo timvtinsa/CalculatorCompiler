@@ -24,6 +24,7 @@ int main(void) {
     cin >> input;
     Automate *automate = new Automate(input);
     automate->run();
+    delete(automate);
 
    return 0;
 }

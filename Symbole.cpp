@@ -39,7 +39,9 @@ Symbole::~Symbole()
 //---------------------------- SymboleSimple - Constructeurs - destructeur
 
 EntierSimple::~EntierSimple() {
-
+#ifdef MAP
+    cout << "Appel au destructeur de <EntierSimple>" << endl;
+#endif
 }
 
 int EntierSimple::eval() {
