@@ -1,28 +1,25 @@
 GCC=g++
-CCFLAGS = -c -g -W -Wall -ansi -pedantic -std=c++0x
+CCFLAGS = -c -g -W -ansi -pedantic -std=c++0x
 DSTATE=
 DDEBUG=
-
 OBJETS = Lexer.o Symbole.o Automate.o Etat.o Expression.o main.o
 EXEC = main
 
-
-ifdef state
-    DSTATE=-DSTATE
+ifdef states
+    DSTATE = -DSTATES
 endif
 
 ifdef debug
-    DDEBUG=-DMAP
+    DDEBUG = -DMAP
 endif
 
-
-all: $(EXEC)
+DFLAGS = $(DDEBUG) $(DSTATE)
 
 $(EXEC) : $(OBJETS)
 	$(GCC) -o $(EXEC) $(OBJETS)
 
 %.o : %.cpp
-	$(GCC) $(CCFLAGS) $(PRINT_MAP) $<
+	$(GCC) $(CCFLAGS) $(DFLAGS) $<
 
 Lexer.o : Lexer.h
 Symbole.o : Symbole.h
@@ -31,17 +28,19 @@ Etat.o : Etat.h
 Expression.o : Expression.h
 
 run: $(EXEC)
+	@echo $(DFLAGS)
 	./$(EXEC)
+	@echo "Run completed."
 
 memory_check : $(EXEC)
-	valgrind --leak-check=yes ./$(EXEC)
+	@valgrind --leak-check=yes ./$(EXEC)
 
 rebuild: cleanall all
 
 clean:
-	rm -rf *.o
-	echo "Binary files deleted."
+	@rm -rf *.o
+	@echo "Binary files deleted."
 
 cleanall: clean
-	rm -rf $(EXEC)
-	echo "Executable deleted."
+	@rm -rf $(EXEC)
+	@echo "Executable deleted."

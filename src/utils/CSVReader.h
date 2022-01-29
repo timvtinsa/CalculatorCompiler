@@ -5,50 +5,51 @@
 
 
 //---------- Interface de la classe <Automate> (fichier Automate.h) ----------------
-#ifndef CALCULATORCOMPILER_AUTOMATE_H
-#define CALCULATORCOMPILER_AUTOMATE_H
+#ifndef CALCULATORCOMPILER_CSVREADER_H
+#define CALCULATORCOMPILER_CSVREADER_H
 
 //--------------------------------------------------- Interfaces utilisées
 using namespace std;
 #include <stack>
-#include "Symbole.h"
-#include "Lexer.h"
-#include "Expression.h"
-
-class Etat;
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
 
 //------------------------------------------------------------------ Types
-typedef stack<Etat*> StateStack;
-typedef stack<Symbole*> SymbolStack;
+typedef vector<string> CSVRow;
+typedef vector<CSVRow> CSVContent;
 
 //--------------------------------------- Définition de la classe Automate
-class Automate {
+class CSVReader {
 public:
 //----------------------------------------------------- Méthodes publiques
-    void reduction(int n, Symbole *s);
+    CSVRow readRow(int index);
 
-    void decalage(Symbole *s, Etat *e);
+    CSVRow getHeader() const;
 
-    void run();
+    CSVContent getContent() const;
 //-------------------------------------------- Constructeurs - destructeur
-    Automate ( const Automate & Automate );
+    CSVReader ( const CSVReader & CSVReader );
     // Mode d'emploi  : Constructeur de copie
 
-    explicit Automate(string chaine);
+    explicit CSVReader(string filename, char delimiter);
     // Mode d'emploi : Constructeur
 
-    virtual ~Automate ( );
+    virtual ~CSVReader( );
     // Mode d'emploi : Destructeur
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-    static Expression* buildBinaryExpression( Entier * operand1,  Entier * operand2, const int & operatorId );
+//    static Expression* buildBinaryExpression( Entier * operand1,  Entier * operand2, const int & operatorId );
 //----------------------------------------------------- Attributs protégés
-    StateStack stateStack;
-    SymbolStack symbolStack;
-    Lexer* lexer;
+    CSVRow header;
+    CSVContent content;
+    string filename;
+    char delimiter;
 
 };
 
 
-#endif //CALCULATORCOMPILER_AUTOMATE_H
+#endif //CALCULATORCOMPILER_CSVREADER_H

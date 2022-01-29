@@ -71,24 +71,25 @@ void Automate::reduction(int n, Symbole *s) {
     lexer->putSymbol(s);
 }
 
-void Automate::run() {
+int Automate::run() {
     bool nextState = true;
-
+    int resultat = -1;
     while (nextState) {
         //TODO Décommenter le debug une fois la config de lancement écrite
-//#ifdef SHOW_STATES_PATH
+#ifdef STATES
         stateStack.top()->print();
-//#endif
+#endif
         Symbole *s = lexer->Consulter();
         lexer->Avancer();
         nextState = stateStack.top()->transition(*this, s);
     }
     if (*symbolStack.top() != ERREUR) {
-        int resultat = (*symbolStack.top()).eval();
+        resultat = (*symbolStack.top()).eval();
         cout << "Valid expression" << endl << "Evaluation result : " << resultat << endl;
     } else {
         cout << "Invalid expression : syntax error." << endl;
     }
+    return resultat;
 }
 
 Expression *

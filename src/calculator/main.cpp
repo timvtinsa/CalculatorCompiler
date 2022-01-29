@@ -22,7 +22,7 @@ int main(void) {
 
     cout << "Entrez l'expression arithmétique :" << endl;
     cin >> input;
-    Automate *automate = new Automate(input);
+    auto *automate = new Automate(input);
     automate->run();
     delete(automate);
 
