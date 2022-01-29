@@ -21,10 +21,9 @@ int Symbole::eval() {
 
 
 //---------------------------------- Symbole - Constructeurs - destructeur
-Symbole::Symbole(const Symbole & aSymbole)
-{
+Symbole::Symbole(int i, bool t) : ident(i), terminal(t) {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Symbole>" << endl;
+    cout << "Appel au constructeur de <Symbole>" << endl;
 #endif
 }
 
@@ -35,15 +34,21 @@ Symbole::~Symbole()
 #endif
 }
 
+//------------------------------------------- EntierSimple - Méthodes publiques
+int EntierSimple::eval() {
+    return valeur;
+}
 
-//---------------------------- SymboleSimple - Constructeurs - destructeur
+//---------------------------- EntierSimple - Constructeurs - destructeur
+EntierSimple::EntierSimple(int val) : Symbole(INT, true), valeur(val)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <EntierSimple>" << endl;
+#endif
+}
 
 EntierSimple::~EntierSimple() {
 #ifdef MAP
     cout << "Appel au destructeur de <EntierSimple>" << endl;
 #endif
-}
-
-int EntierSimple::eval() {
-    return valeur;
 }

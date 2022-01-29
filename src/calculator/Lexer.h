@@ -38,6 +38,6 @@ public:
 
 protected:
     string flux;
-    int tete;
+    long unsigned int tete;
     Symbole *tampon;
 };

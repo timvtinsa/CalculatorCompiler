@@ -85,7 +85,7 @@ int Automate::run() {
     }
     if (*symbolStack.top() != ERREUR) {
         resultat = (*symbolStack.top()).eval();
-        cout << "Valid expression" << endl << "Evaluation result : " << resultat << endl;
+        cout << "Valid expression." << endl << "Evaluation result : " << resultat << endl;
     } else {
         cout << "Invalid expression : syntax error." << endl;
     }
@@ -102,6 +102,7 @@ Automate::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int 
         default:
             cout << "Erreur lors de la création l'expression binaire" << endl;
     }
+    return nullptr;
 }
 
 
@@ -109,9 +110,9 @@ Automate::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int 
 //---------------------------------- Automate - Constructeurs - destructeur
 Automate::Automate(string input)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Automate>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au constructeur de <Automate>" << endl;
+    #endif
     this->lexer = new Lexer(move(input));
     E0 * initState = new E0();
     stateStack.push(initState);

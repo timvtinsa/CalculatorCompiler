@@ -1,16 +1,19 @@
 GCC=g++
 CCFLAGS = -c -g -W -ansi -pedantic -std=c++0x
-DSTATE=
-DDEBUG=
+DFLAGS =
 OBJETS = Lexer.o Symbole.o Automate.o Etat.o Expression.o main.o
 EXEC = main
 
 ifdef states
-    DSTATE = -DSTATES
+ifeq ($(states),true)
+	DFLAGS += -DSTATES
+endif
 endif
 
 ifdef debug
-    DDEBUG = -DMAP
+ifeq ($(debug),true)
+    DFLAGS += -DMAP
+endif
 endif
 
 DFLAGS = $(DDEBUG) $(DSTATE)
@@ -28,14 +31,11 @@ Etat.o : Etat.h
 Expression.o : Expression.h
 
 run: $(EXEC)
-	@echo $(DFLAGS)
 	./$(EXEC)
 	@echo "Run completed."
 
 memory_check : $(EXEC)
 	@valgrind --leak-check=yes ./$(EXEC)
-
-rebuild: cleanall all
 
 clean:
 	@rm -rf *.o

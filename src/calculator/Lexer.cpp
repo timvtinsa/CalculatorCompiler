@@ -4,6 +4,7 @@
 *************************************************************************/
 
 //-------------------------------------------------------- Include système
+#include <iostream>
 //------------------------------------------------------ Include personnel
 #include "Lexer.h"
 
@@ -11,7 +12,7 @@
 Symbole * Lexer::Consulter() {
    if (!tampon) {
 
-      if (tete==flux.length())
+      if (tete == flux.length())
          tampon = new Symbole(FIN, true);
       else
       {

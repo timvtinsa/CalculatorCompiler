@@ -1,6 +1,8 @@
 # 'Google_test' is the subproject name
 project(Google_tests)
 
+cmake_minimum_required(VERSION 3.13)
+
 # 'lib' is the folder with Google Test sources
 add_subdirectory(lib/googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
@@ -11,7 +13,6 @@ include_directories(../src)
 # 'test.cpp' is a source file with tests
 add_executable(Google_Tests_run
         ../test/test.cpp
-        ../test/TAutomate.h
         ../src/utils/CSVReader.cpp
         ../src/utils/CSVReader.h
         ../src/calculator/Automate.cpp

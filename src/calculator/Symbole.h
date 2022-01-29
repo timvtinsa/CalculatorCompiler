@@ -33,15 +33,10 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     Symbole (const Symbole & aSymbole );
-    // Mode d'emploi  : Constructeur de copie
+    // Mode d'emploi : Constructeur de copie
 
-    Symbole(int i, bool t) : ident(i), terminal(t)
+    Symbole(int i, bool t);
     // Mode d'emploi : Constructeur
-    {
-#ifdef MAP
-    cout << "Appel au constructeur de <Symbole>" << endl;
-#endif
-    };
 
     virtual ~Symbole();
     // Mode d'emploi : Destructeur
@@ -63,13 +58,7 @@ public:
     EntierSimple (const EntierSimple & aEntierSimple );
     // Mode d'emploi  : Constructeur de copie
 
-    explicit EntierSimple(int val) : Symbole(INT, true), valeur(val)
-    // Mode d'emploi : Constructeur
-    {
-#ifdef MAP
-        cout << "Appel au constructeur de <Symbole>" << endl;
-#endif
-    };
+    explicit EntierSimple(int val);
 
     ~EntierSimple() override;
     // Mode d'emploi : Destructeur
