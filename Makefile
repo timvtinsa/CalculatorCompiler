@@ -1,6 +1,6 @@
 GCC=g++
 CCFLAGS = -c -g -W -ansi -pedantic -std=c++0x
-OBJETS = Lexer.o Symbole.o Automate.o Etat.o Expression.o main.o
+OBJETS = Lexer.o Symbol.o Automaton.o State.o Expression.o main.o
 EXEC = main
 MAKEFLAGS += --no-print-directory
 CALCULATOR = ./src/calculator
@@ -21,9 +21,9 @@ $(EXEC) : $(OBJETS)
 	$(GCC) $(CCFLAGS) $(DFLAGS) $<
 
 Lexer.o : $(CALCULATOR)/Lexer.h
-Symbole.o : $(CALCULATOR)/Symbole.h
-Automate.o : $(CALCULATOR)/Automate.h
-Etat.o : $(CALCULATOR)/Etat.h
+Symbol.o : $(CALCULATOR)/Symbol.h
+Automaton.o : $(CALCULATOR)/Automaton.h
+State.o : $(CALCULATOR)/State.h
 Expression.o : $(CALCULATOR)/Expression.h
 
 run: $(EXEC)

@@ -1,23 +1,23 @@
 /*************************************************************************
-                      Etat  -  Interface de la classe Etat
+                      State  -  Interface de la classe State
                              -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <Etat> (fichier Etat.h) et des classes Etats issues de la classe  ----------------
+//---------- Interface de la classe <State> (fichier State.h) et des classes Etats issues de la classe  ----------------
 #pragma once
 
-#ifndef CALCULATORCOMPILER_ETAT_H
-#define CALCULATORCOMPILER_ETAT_H
+#ifndef CALCULATORCOMPILER_STATE_H
+#define CALCULATORCOMPILER_STATE_H
 
 //--------------------------------------------------- Interfaces utilisées
 using namespace std;
 #include <string>
-#include "Automate.h"
+#include "Automaton.h"
 //------------------------------------------------------------------ Types
 
 
-// Déclaration de la classe abstraite Etat
-class Etat {
+// Déclaration de la classe abstraite State
+class State {
 
 //----------------------------------------------------------------- PUBLIC
 public:
@@ -25,16 +25,16 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void print() const;
 
-    virtual bool transition(Automate &automate, Symbole *s) = 0;
+    virtual bool transition(Automaton &automate, Symbol *s) = 0;
 
 //-------------------------------------------- Constructeurs - destructeur
-    Etat ( const Etat & Etat );
+    State ( const State & Etat );
     // Mode d'emploi : Constructeur de copie
 
-    Etat(string name);
+    State(string name);
     // Mode d'emploi : Constructeur
 
-    virtual ~Etat();
+    virtual ~State();
     // Mode d'emploi : Destructeur
 
 //------------------------------------------------------------------ PROTEGE
@@ -43,14 +43,14 @@ protected:
 };
 
 
-// Déclaration des différents états issus de la classe abstraite Etat
+// Déclaration des différents états issus de la classe abstraite State
 
 //--------------------------------------------- Définition de la classe E0
-class E0 : public Etat {
+class E0 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s);
+    bool transition(Automaton &automate, Symbol *s);
 
 //-------------------------------------------- Constructeurs - destructeur
     E0();
@@ -58,11 +58,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E1
-class E1 : public Etat {
+class E1 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E1();
@@ -70,11 +70,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E2
-class E2 : public Etat {
+class E2 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E2();
@@ -82,11 +82,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E3
-class E3 : public Etat {
+class E3 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E3();
@@ -94,11 +94,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E4
-class E4 : public Etat {
+class E4 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E4();
@@ -106,11 +106,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E5
-class E5 : public Etat {
+class E5 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E5();
@@ -118,22 +118,22 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E6
-class E6 : public Etat {
+class E6 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E6();
 };
 
 //--------------------------------------------- Définition de la classe E7
-class E7 : public Etat {
+class E7 : public State {
 
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //----------------------------------------------------- Méthodes publiques
     E7();
@@ -141,11 +141,11 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E8
-class E8 : public Etat {
+class E8 : public State {
 
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //----------------------------------------------------- Méthodes publiques
     E8();
@@ -153,15 +153,15 @@ public:
 
 
 //--------------------------------------------- Définition de la classe E9
-class E9 : public Etat {
+class E9 : public State {
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    bool transition(Automate &automate, Symbole *s) override;
+    bool transition(Automaton &automate, Symbol *s) override;
 
 //-------------------------------------------- Constructeurs - destructeur
     E9();
 };
 
 
-#endif //CALCULATORCOMPILER_ETAT_H
+#endif //CALCULATORCOMPILER_STATE_H

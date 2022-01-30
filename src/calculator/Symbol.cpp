@@ -1,5 +1,5 @@
 /*************************************************************************
-                          Symbole.cpp  -  Implémentation
+                          Symbol.cpp  -  Implémentation
                              -------------------
 *************************************************************************/
 
@@ -7,30 +7,30 @@
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Symbole.h"
+#include "Symbol.h"
 
-//------------------------------------------- Symbole - Méthodes publiques
-void Symbole::Affiche()
+//------------------------------------------- Symbol - Méthodes publiques
+void Symbol::Affiche()
 {
     cout<<Etiquettes[ident];
 }
 
-int Symbole::eval() {
+int Symbol::eval() {
     return -1;
 }
 
 
-//---------------------------------- Symbole - Constructeurs - destructeur
-Symbole::Symbole(int i, bool t) : ident(i), terminal(t) {
+//---------------------------------- Symbol - Constructeurs - destructeur
+Symbol::Symbol(int i, bool t) : ident(i), terminal(t) {
 #ifdef MAP
-    cout << "Appel au constructeur de <Symbole>" << endl;
+    cout << "Appel au constructeur de <Symbol>" << endl;
 #endif
 }
 
-Symbole::~Symbole()
+Symbol::~Symbol()
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Symbole>" << endl;
+    cout << "Appel au destructeur de <Symbol>" << endl;
 #endif
 }
 
@@ -40,7 +40,7 @@ int EntierSimple::eval() {
 }
 
 //---------------------------- EntierSimple - Constructeurs - destructeur
-EntierSimple::EntierSimple(int val) : Symbole(INT, true), valeur(val)
+EntierSimple::EntierSimple(int val) : Symbol(INT, true), valeur(val)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <EntierSimple>" << endl;

@@ -11,16 +11,16 @@
 using namespace std;
 #include <string>
 #include <vector>
-#include "Symbole.h"
+#include "Symbol.h"
 
 //------------------------------------- Définition de la classe Expression
-class Expression : public Symbole {
+class Expression : public Symbol {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    Expression(const Symbole &aSymbole, const Expression &anExpression);
+    Expression(const Symbol &aSymbole, const Expression &anExpression);
     // Mode d'emploi  : Constructeur de copie
 
-    Expression() : Symbole(EXPR, false)
+    Expression() : Symbol(EXPR, false)
     {
 #ifdef MAP
         cout << "Appel au constructeur de <Expression>" << endl;
@@ -28,7 +28,7 @@ public:
     }
     // Mode d'emploi  : Constructeur
 
-    Expression(Identificateurs id, bool isTerminal) : Symbole(id, isTerminal)
+    Expression(Identificateurs id, bool isTerminal) : Symbol(id, isTerminal)
     {
 #ifdef MAP
         cout << "Appel au constructeur de <Expression>" << endl;
@@ -46,7 +46,7 @@ public:
 class Entier : public Expression {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    Entier(const Symbole &sSymbole, const Entier &aEntier);
+    Entier(const Symbol &sSymbole, const Entier &aEntier);
     // Mode d'emploi  : Constructeur de copie
 
     explicit Entier(int val) : Expression(), valeur(val)
@@ -71,22 +71,22 @@ protected:
 };
 
 
-//------------------------------ Définition de la classe ExpressionBinaire
-class ExpressionBinaire : public Expression {
+//------------------------------ Définition de la classe BinaryExpression
+class BinaryExpression : public Expression {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    ExpressionBinaire(const ExpressionBinaire &anExpressionBinaire);
+    BinaryExpression(const BinaryExpression &aBinaryExpression);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionBinaire(Identificateurs opSymbol, Entier* opd1, Entier* opd2) : Expression(EXPR,false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
+    BinaryExpression(Identificateurs opSymbol, Entier* opd1, Entier* opd2) : Expression(EXPR, false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
     {
 #ifdef MAP
-        cout << "Appel au constructeur de <ExpressionBinaire>" << endl;
+        cout << "Appel au constructeur de <BinaryExpression>" << endl;
 #endif
     }
     // Mode d'emploi  : Constructeur
 
-    ~ExpressionBinaire() override;
+    ~BinaryExpression() override;
     // Mode d'emploi  : Destructeur
 
 //----------------------------------------------------- Méthodes publiques
@@ -99,13 +99,13 @@ protected:
 };
 
 //--------------------------------- Définition de la classe ExpressionPlus
-class ExpressionPlus : public ExpressionBinaire {
+class ExpressionPlus : public BinaryExpression {
 public:
 //-------------------------------------------- Constructeurs - destructeur
-    ExpressionPlus(const ExpressionBinaire &anExpressionBinaire);
+    ExpressionPlus(const BinaryExpression &aBinaryExpression);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionPlus(Entier * opd1,  Entier * opd2) : ExpressionBinaire(PLUS, opd1, opd2)
+    ExpressionPlus(Entier * opd1,  Entier * opd2) : BinaryExpression(PLUS, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionPlus>" << endl;
@@ -120,13 +120,13 @@ public:
 };
 
 //--------------------------------- Définition de la classe ExpressionMult
-class ExpressionMult : public ExpressionBinaire {
+class ExpressionMult : public BinaryExpression {
 public:
 //-------------------------------------------- Constructeurs - destructeur
     ExpressionMult(const ExpressionMult &anExpressionMult);
     // Mode d'emploi  : Constructeur de copie
 
-    ExpressionMult(Entier * opd1, Entier * opd2) : ExpressionBinaire(MULT, opd1, opd2)
+    ExpressionMult(Entier * opd1, Entier * opd2) : BinaryExpression(MULT, opd1, opd2)
     {
         #ifdef MAP
                 cout << "Appel au constructeur de <ExpressionMult>" << endl;

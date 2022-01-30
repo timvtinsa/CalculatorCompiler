@@ -10,7 +10,7 @@
 using namespace std;
 #include <string>
 #include <utility>
-#include "Symbole.h"
+#include "Symbol.h"
 
 //------------------------------------------ Définition de la classe Lexer
 class Lexer {
@@ -26,18 +26,18 @@ public:
         #endif
     }
 
-    void putSymbol(Symbole *s);
+    void putSymbol(Symbol *s);
 
     virtual ~Lexer();
 
 //----------------------------------------------------- Méthodes publiques
 
-    Symbole *Consulter();
+    Symbol *Consulter();
 
     void Avancer();
 
 protected:
     string flux;
     long unsigned int tete;
-    Symbole *tampon;
+    Symbol *tampon;
 };

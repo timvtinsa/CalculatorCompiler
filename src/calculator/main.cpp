@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Lexer.h"
-#include "Automate.h"
+#include "Automaton.h"
 
 
 int main(void) {
@@ -10,7 +10,7 @@ int main(void) {
 //
 //   Lexer l(chaine);
 //
-//   Symbole * s;
+//   Symbol * s;
 //   while(*(s=l.Consulter())!=FIN) {
 //      s->Affiche();
 //      cout<<endl;
@@ -20,9 +20,9 @@ int main(void) {
 //----------- NEW MAIN -----------
     string input;
 
-    cout << "Entrez l'expression arithmétique :" << endl;
+    cout << "Enter the arithmetic expression :" << endl;
     cin >> input;
-    auto *automate = new Automate(input);
+    auto *automate = new Automaton(input);
     automate->run();
     delete(automate);
 

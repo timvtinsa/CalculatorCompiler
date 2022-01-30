@@ -1,9 +1,9 @@
 /*************************************************************************
-                     Automate  -  Réalisation de la classe
+                     Automaton  -  Réalisation de la classe
                              -------------------
 *************************************************************************/
 
-//---------- Réalisation de la classe <Automate> (fichier Automate.cpp) ------------
+//---------- Réalisation de la classe <Automaton> (fichier Automaton.cpp) ------------
 
 
 //-------------------------------------------------------- Include système
@@ -25,7 +25,7 @@ CSVRow CSVReader::getHeader() const {
     return this->header;
 }
 
-//---------------------------------- Automate - Constructeurs - destructeur
+//---------------------------------- Automaton - Constructeurs - destructeur
 CSVReader::CSVReader(string filename, char delimiter)
 {
 #ifdef MAP

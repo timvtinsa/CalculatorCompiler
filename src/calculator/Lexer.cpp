@@ -9,29 +9,29 @@
 #include "Lexer.h"
 
 //--------------------------------------------- Lexer - Méthodes publiques
-Symbole * Lexer::Consulter() {
+Symbol * Lexer::Consulter() {
    if (!tampon) {
 
       if (tete == flux.length())
-         tampon = new Symbole(FIN, true);
+         tampon = new Symbol(FIN, true);
       else
       {
 
          switch (flux[tete]) {
             case '(':
-               tampon = new Symbole(OPENPAR, true);
+               tampon = new Symbol(OPENPAR, true);
                tete++;
                break;
             case ')':
-               tampon = new Symbole(CLOSEPAR, true);
+               tampon = new Symbol(CLOSEPAR, true);
                tete++;
                break;
             case '*':
-               tampon = new Symbole(MULT, true);
+               tampon = new Symbol(MULT, true);
                tete++;
                break;
             case '+':
-               tampon = new Symbole(PLUS, true );
+               tampon = new Symbol(PLUS, true );
                tete++;
                break;
             default:
@@ -46,7 +46,7 @@ Symbole * Lexer::Consulter() {
                   tampon = new EntierSimple(resultat);
                }
                else {
-                  tampon = new Symbole(ERREUR, true);
+                  tampon = new Symbol(ERREUR, true);
                }
          }
       }
@@ -58,7 +58,7 @@ void Lexer::Avancer() {
    tampon = nullptr;
 }
 
-void Lexer::putSymbol(Symbole *s) {
+void Lexer::putSymbol(Symbol *s) {
     tampon = s;
 }
 

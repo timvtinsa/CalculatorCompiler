@@ -1,9 +1,9 @@
 /*************************************************************************
-               Symbole.h  - Interface de la classe Symbole
+               Symbol.h  - Interface de la classe Symbol
                          -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <Automate> (fichier Automate.h) ----------------
+//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
 #pragma once
 
 //--------------------------------------------------- Interfaces utilisées
@@ -18,8 +18,8 @@ enum Identificateurs {
     OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR, EXPR
 };
 
-//---------------------------------------- Définition de la classe Symbole
-class Symbole {
+//---------------------------------------- Définition de la classe Symbol
+class Symbol {
 public:
 //----------------------------------------------------- Méthodes publiques
     virtual void Affiche();
@@ -32,13 +32,13 @@ public:
     operator int() const { return ident; }
 
 //-------------------------------------------- Constructeurs - destructeur
-    Symbole (const Symbole & aSymbole );
+    Symbol (const Symbol & aSymbole );
     // Mode d'emploi : Constructeur de copie
 
-    Symbole(int i, bool t);
+    Symbol(int i, bool t);
     // Mode d'emploi : Constructeur
 
-    virtual ~Symbole();
+    virtual ~Symbol();
     // Mode d'emploi : Destructeur
 
 protected:
@@ -49,7 +49,7 @@ protected:
 
 
 //---------------------------------- Définition de la classe SymboleSimple
-class EntierSimple : public Symbole {
+class EntierSimple : public Symbol {
 public:
 //----------------------------------------------------- Méthodes publiques
     virtual int eval();

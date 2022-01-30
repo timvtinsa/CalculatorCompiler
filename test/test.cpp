@@ -4,10 +4,9 @@
 *************************************************************************/
 
 #include "gtest/gtest.h"
-#include "../src/calculator/Automate.h"
+#include "../src/calculator/Automaton.h"
 #include "../src/utils/CSVReader.h"
 
-//TODO Voir pour modifier l'emplacement du dossier utils
 //TODO Commenter le code
 //TODO Faire le readme
 
@@ -17,7 +16,7 @@ int main(int argc, char **argv)
     return RUN_ALL_TESTS();
 }
 
-TEST(TestAutomate, EvaluateExpression)
+TEST(TestAutomaton, EvaluateExpression)
 {
     CSVReader reader("../test/expressions", ';');
     CSVContent content = reader.getContent();
@@ -26,7 +25,7 @@ TEST(TestAutomate, EvaluateExpression)
         string exprStr = row[0];
         string evalStr = row[1];
         cout << "Expression : " << exprStr << endl;
-        auto * automateTest = new Automate(exprStr);
+        auto * automateTest = new Automaton(exprStr);
         int result = automateTest->run();
         delete(automateTest);
         cout << "Expected result : " << evalStr << endl;

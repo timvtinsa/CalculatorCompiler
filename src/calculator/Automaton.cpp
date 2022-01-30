@@ -1,9 +1,9 @@
 /*************************************************************************
-                     Automate  -  Réalisation de la classe
+                     Automaton  -  Réalisation de la classe
                              -------------------
 *************************************************************************/
 
-//---------- Réalisation de la classe <Automate> (fichier Automate.cpp) ------------
+//---------- Réalisation de la classe <Automaton> (fichier Automaton.cpp) ------------
 
 
 //-------------------------------------------------------- Include système
@@ -12,14 +12,14 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Etat.h"
+#include "State.h"
 #include "Expression.h"
-#include "Automate.h"
+#include "Automaton.h"
 
 
-//------------------------------------------ Automate - Méthodes publiques
+//------------------------------------------ Automaton - Méthodes publiques
 
-void Automate::decalage(Symbole *s, Etat *e) {
+void Automaton::decalage(Symbol *s, State *e) {
     symbolStack.push(s);
     stateStack.push(e);
     if (s->isTerminal()) {
@@ -28,7 +28,7 @@ void Automate::decalage(Symbole *s, Etat *e) {
 }
 
 
-void Automate::reduction(int n, Symbole *s) {
+void Automaton::reduction(int n, Symbol *s) {
     SymbolStack aEnlever;
 
     for (int i = 0; i < n; i++) {
@@ -71,28 +71,28 @@ void Automate::reduction(int n, Symbole *s) {
     lexer->putSymbol(s);
 }
 
-int Automate::run() {
+int Automaton::run() {
     bool nextState = true;
-    int resultat = -1;
+    int result = -1;
     while (nextState) {
 #ifdef STATES
         stateStack.top()->print();
 #endif
-        Symbole *s = lexer->Consulter();
+        Symbol *s = lexer->Consulter();
         lexer->Avancer();
         nextState = stateStack.top()->transition(*this, s);
     }
     if (*symbolStack.top() != ERREUR) {
-        resultat = (*symbolStack.top()).eval();
-        cout << "Valid expression." << endl << "Evaluation result : " << resultat << endl;
+        result = (*symbolStack.top()).eval();
+        cout << "Valid expression." << endl << "Evaluation result : " << result << endl;
     } else {
-        cout << "Invalid expression : syntax error." << endl;
+        cout << "Invalid expression : syntax error. (Error code : -1)" << endl;
     }
-    return resultat;
+    return result;
 }
 
 Expression *
-Automate::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int &operatorId) {
+Automaton::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int &operatorId) {
     switch (operatorId) {
         case PLUS:
             return new ExpressionPlus(operand1, operand2);
@@ -106,21 +106,21 @@ Automate::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int 
 
 
 
-//---------------------------------- Automate - Constructeurs - destructeur
-Automate::Automate(string input)
+//---------------------------------- Automaton - Constructeurs - destructeur
+Automaton::Automaton(string input)
 {
     #ifdef MAP
-        cout << "Appel au constructeur de <Automate>" << endl;
+        cout << "Appel au constructeur de <Automaton>" << endl;
     #endif
     this->lexer = new Lexer(move(input));
     E0 * initState = new E0();
     stateStack.push(initState);
 }
 
-Automate::~Automate()
+Automaton::~Automaton()
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Automate>" << endl;
+    cout << "Appel au destructeur de <Automaton>" << endl;
 #endif
     delete (lexer);
     while (!stateStack.empty()) {

@@ -16,9 +16,9 @@ Expression::~Expression()
 #endif
 }
 
-//------------------------------------------- Symbole - Méthodes publiques
+//------------------------------------------- Symbol - Méthodes publiques
 void Entier::Affiche() {
-    Symbole::Affiche();
+    Symbol::Affiche();
     cout<<"("<<valeur<<")";
 }
 
@@ -36,19 +36,19 @@ Entier::~Entier()
 
 
 
-//---------------------- ExpressionBinaire --- Constructeurs - destructeur
-ExpressionBinaire::~ExpressionBinaire()
+//---------------------- BinaryExpression --- Constructeurs - destructeur
+BinaryExpression::~BinaryExpression()
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <ExpressionBinaire>" << endl;
+    cout << "Appel au destructeur de <BinaryExpression>" << endl;
 #endif
     delete(operand1);
     delete(operand2);
 }
 
-//------------------------------------ ExpressionBinaire - Méthodes publiques
+//------------------------------------ BinaryExpression - Méthodes publiques
 
-int ExpressionBinaire::eval() {
+int BinaryExpression::eval() {
     return 0;
 }
 

@@ -1,10 +1,10 @@
 /*************************************************************************
-               Automate.h  - Interface de la classe Automate
+               Automaton.h  - Interface de la classe Automaton
                          -------------------
 *************************************************************************/
 
 
-//---------- Interface de la classe <Automate> (fichier Automate.h) ----------------
+//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
 #ifndef CALCULATORCOMPILER_CSVREADER_H
 #define CALCULATORCOMPILER_CSVREADER_H
 
@@ -21,7 +21,7 @@ using namespace std;
 typedef vector<string> CSVRow;
 typedef vector<CSVRow> CSVContent;
 
-//--------------------------------------- Définition de la classe Automate
+//--------------------------------------- Définition de la classe Automaton
 class CSVReader {
 public:
 //----------------------------------------------------- Méthodes publiques

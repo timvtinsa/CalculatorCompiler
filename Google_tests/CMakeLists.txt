@@ -15,14 +15,14 @@ add_executable(Google_Tests_run
         ../test/test.cpp
         ../src/utils/CSVReader.cpp
         ../src/utils/CSVReader.h
-        ../src/calculator/Automate.cpp
-        ../src/calculator/Automate.h
+        ../src/calculator/Automaton.cpp
+        ../src/calculator/Automaton.h
         ../src/calculator/Lexer.cpp
         ../src/calculator/Lexer.h
-        ../src/calculator/Symbole.cpp
-        ../src/calculator/Symbole.h
-        ../src/calculator/Etat.cpp
-        ../src/calculator/Etat.h
+        ../src/calculator/Symbol.cpp
+        ../src/calculator/Symbol.h
+        ../src/calculator/State.cpp
+        ../src/calculator/State.h
         ../src/calculator/Expression.cpp
         ../src/calculator/Expression.h
         )

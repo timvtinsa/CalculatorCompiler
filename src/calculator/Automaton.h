@@ -1,43 +1,43 @@
 /*************************************************************************
-               Automate.h  - Interface de la classe Automate
+               Automaton.h  - Interface de la classe Automaton
                          -------------------
 *************************************************************************/
 
 
-//---------- Interface de la classe <Automate> (fichier Automate.h) ----------------
-#ifndef CALCULATORCOMPILER_AUTOMATE_H
-#define CALCULATORCOMPILER_AUTOMATE_H
+//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
+#ifndef CALCULATORCOMPILER_AUTOMATON_H
+#define CALCULATORCOMPILER_AUTOMATON_H
 
 //--------------------------------------------------- Interfaces utilisées
 using namespace std;
 #include <stack>
-#include "Symbole.h"
+#include "Symbol.h"
 #include "Lexer.h"
 #include "Expression.h"
 
-class Etat;
+class State;
 
 //------------------------------------------------------------------ Types
-typedef stack<Etat*> StateStack;
-typedef stack<Symbole*> SymbolStack;
+typedef stack<State*> StateStack;
+typedef stack<Symbol*> SymbolStack;
 
-//--------------------------------------- Définition de la classe Automate
-class Automate {
+//--------------------------------------- Définition de la classe Automaton
+class Automaton {
 public:
 //----------------------------------------------------- Méthodes publiques
-    void reduction(int n, Symbole *s);
+    void reduction(int n, Symbol *s);
 
-    void decalage(Symbole *s, Etat *e);
+    void decalage(Symbol *s, State *e);
 
     int run();
 //-------------------------------------------- Constructeurs - destructeur
-    Automate ( const Automate & Automate );
+    Automaton ( const Automaton & Automate );
     // Mode d'emploi  : Constructeur de copie
 
-    explicit Automate(string chaine);
+    explicit Automaton(string chaine);
     // Mode d'emploi : Constructeur
 
-    virtual ~Automate ( );
+    virtual ~Automaton ( );
     // Mode d'emploi : Destructeur
 
 protected:
@@ -51,4 +51,4 @@ protected:
 };
 
 
-#endif //CALCULATORCOMPILER_AUTOMATE_H
+#endif //CALCULATORCOMPILER_AUTOMATON_H
