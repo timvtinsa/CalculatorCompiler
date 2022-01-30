@@ -75,7 +75,6 @@ int Automate::run() {
     bool nextState = true;
     int resultat = -1;
     while (nextState) {
-        //TODO Décommenter le debug une fois la config de lancement écrite
 #ifdef STATES
         stateStack.top()->print();
 #endif

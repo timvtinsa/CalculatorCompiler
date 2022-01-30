@@ -7,6 +7,10 @@
 #include "../src/calculator/Automate.h"
 #include "../src/utils/CSVReader.h"
 
+//TODO Voir pour modifier l'emplacement du dossier utils
+//TODO Commenter le code
+//TODO Faire le readme
+
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
@@ -30,5 +34,5 @@ TEST(TestAutomate, EvaluateExpression)
         cout << endl;
     }
     auto nbTest = content.size();
-    cout << nbTest << " tests carried out with succes." << endl;
+    cout << nbTest << " tests carried out with success." << endl;
 }

@@ -1,34 +1,30 @@
 GCC=g++
 CCFLAGS = -c -g -W -ansi -pedantic -std=c++0x
-DFLAGS =
 OBJETS = Lexer.o Symbole.o Automate.o Etat.o Expression.o main.o
 EXEC = main
+MAKEFLAGS += --no-print-directory
+CALCULATOR = ./src/calculator
+DFLAGS =
 
-ifdef states
 ifeq ($(states),true)
 	DFLAGS += -DSTATES
 endif
-endif
 
-ifdef debug
 ifeq ($(debug),true)
     DFLAGS += -DMAP
 endif
-endif
-
-DFLAGS = $(DDEBUG) $(DSTATE)
 
 $(EXEC) : $(OBJETS)
 	$(GCC) -o $(EXEC) $(OBJETS)
 
-%.o : %.cpp
+%.o : $(CALCULATOR)/%.cpp
 	$(GCC) $(CCFLAGS) $(DFLAGS) $<
 
-Lexer.o : Lexer.h
-Symbole.o : Symbole.h
-Automate.o : Automate.h
-Etat.o : Etat.h
-Expression.o : Expression.h
+Lexer.o : $(CALCULATOR)/Lexer.h
+Symbole.o : $(CALCULATOR)/Symbole.h
+Automate.o : $(CALCULATOR)/Automate.h
+Etat.o : $(CALCULATOR)/Etat.h
+Expression.o : $(CALCULATOR)/Expression.h
 
 run: $(EXEC)
 	./$(EXEC)
@@ -44,3 +40,12 @@ clean:
 cleanall: clean
 	@rm -rf $(EXEC)
 	@echo "Executable deleted."
+
+gtest:
+	cmake ./Google_tests/CMakeLists.txt
+	cd ./Google_tests && make
+	cd ./Google_tests && ./Google_Tests_run
+
+cleantest:
+	cmake --build ./Google_tests --target clean
+	@echo "CMake build cleaned."
