@@ -7,8 +7,6 @@
 #include "../src/calculator/Automaton.h"
 #include "../src/utils/CSVReader.h"
 
-//TODO Commenter le code
-
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
@@ -23,7 +21,7 @@ int main(int argc, char **argv)
 // this expression. The CSV file contains 1000 lines which corresponds
 // to 1000 expressions to test. If one of the evaluations is wrong
 // then the test fails.
-// NB : The test also include expressions with syntax error which
+// NB : The test also include invalid expressions with syntax error which
 // have to be detected by the analyzer.
 
 

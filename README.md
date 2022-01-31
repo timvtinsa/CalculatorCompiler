@@ -66,3 +66,43 @@ Below is the LALR(1) analysis table :
 Below is the states graphe of the LALR(1) automaton which shows the different possible transitions between the states : 
 
 ![Automaton States Graphe](./img/states_graphe.png)
+
+## How tests work ?
+The tests are based on Google Tests framework.
+The test takes one by one the lines of the CSV file
+"test/expressions.csv" (one line = one expression to test & its result)
+and give the corresponding expression in input of the analyzer.
+If the result of the evaluation of the expression is the same
+as the result provided in the CSV file, then the test is OK for
+this expression. The CSV file contains 1000 lines which corresponds
+to 1000 expressions to test. If one of the evaluations is wrong
+then the test fails.
+
+NB : The test also include invalid expressions with syntax error which
+/have to be detected by the analyzer.
+
+Example of execution :
+```
+1000 tests carried out with success.
+[       OK ] TestAutomaton.EvaluateExpression (130 ms)
+[----------] 1 test from TestAutomaton (131 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (131 ms total)
+[  PASSED  ] 1 test.
+```
+
+Example of execution with a valid expression : 
+```
+Expression : ((20+2+12)*12+8*(17*17)+12+2+(16*17*3*16)*9)
+Valid expression.
+Evaluation result : 120238
+Expected result : 120238
+```
+
+Example of execution with an invalid expression : 
+```
+Expression : ((6*8+5*6((0*15*17)*6))+(14+14+13+17)*11)
+Invalid expression : syntax error. (Error code : -1)
+Expected result : -1
+```

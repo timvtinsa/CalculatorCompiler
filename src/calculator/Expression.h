@@ -3,11 +3,11 @@
                          -------------------
 *************************************************************************/
 
-//---------- Interface of the class <Expression> (file Expresion.h) ----------------
+//------ Interface of the class <Expression> (file Expresion.h) ----------
 #ifndef CALCULATORCOMPILER_EXPRESSION_H
 #define CALCULATORCOMPILER_EXPRESSION_H
 
-//--------------------------------------------------- Interfaces used
+//-------------------------------------------------------- Interfaces used
 using namespace std;
 #include <string>
 #include <vector>
