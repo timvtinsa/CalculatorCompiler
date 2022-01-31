@@ -1,29 +1,28 @@
 /*************************************************************************
-                     Automaton  -  Réalisation de la classe
+                        Automaton  -  Implementation
                              -------------------
 *************************************************************************/
 
-//---------- Réalisation de la classe <Automaton> (fichier Automaton.cpp) ------------
-
-
-//-------------------------------------------------------- Include système
+//--------------------------------------------------------- System include
 using namespace std;
 #include <utility>
 #include <iostream>
 
-//------------------------------------------------------ Include personnel
+//------------------------------------------------------- Personal include
 #include "State.h"
 #include "Expression.h"
 #include "Automaton.h"
 
 
-//------------------------------------------ Automaton - Méthodes publiques
+//----- Implementation of the class <Automaton> (file Automaton.cpp) -----
 
-void Automaton::decalage(Symbol *s, State *e) {
+//--------------------------------------------- Automaton - Public methods
+
+void Automaton::shift(Symbol *s, State *e) {
     symbolStack.push(s);
     stateStack.push(e);
-    if (s->isTerminal()) {
-        lexer->Avancer();
+    if (s->IsTerminal()) {
+        lexer->GoAhead();
     }
 }
 
@@ -41,7 +40,7 @@ void Automaton::reduction(int n, Symbol *s) {
     Expression *expr = nullptr;
     if (n == 1)
     {
-        expr = new Entier(aEnlever.top()->eval());
+        expr = new Entier(aEnlever.top()->Eval());
     }
     else if (n == 3)
     {
@@ -49,18 +48,18 @@ void Automaton::reduction(int n, Symbol *s) {
         {
             delete(aEnlever.top());
             aEnlever.pop();
-            expr = new Entier(aEnlever.top()->eval());
+            expr = new Entier(aEnlever.top()->Eval());
             delete(aEnlever.top());
             aEnlever.pop();
         } else
         {
-            auto * operand1 = new Entier(aEnlever.top()->eval());
+            auto * operand1 = new Entier(aEnlever.top()->Eval());
             delete(aEnlever.top());
             aEnlever.pop();
             int operatorSymbol = *aEnlever.top();
             delete(aEnlever.top());
             aEnlever.pop();
-            auto * operand2 = new Entier((*aEnlever.top()).eval());
+            auto * operand2 = new Entier((*aEnlever.top()).Eval());
             expr = buildBinaryExpression(operand1, operand2, operatorSymbol);
         }
     }
@@ -78,12 +77,12 @@ int Automaton::run() {
 #ifdef STATES
         stateStack.top()->print();
 #endif
-        Symbol *s = lexer->Consulter();
-        lexer->Avancer();
+        Symbol *s = lexer->Consult();
+        lexer->GoAhead();
         nextState = stateStack.top()->transition(*this, s);
     }
     if (*symbolStack.top() != ERREUR) {
-        result = (*symbolStack.top()).eval();
+        result = (*symbolStack.top()).Eval();
         cout << "Valid expression." << endl << "Evaluation result : " << result << endl;
     } else {
         cout << "Invalid expression : syntax error. (Error code : -1)" << endl;
@@ -106,11 +105,11 @@ Automaton::buildBinaryExpression( Entier* operand1,  Entier* operand2, const int
 
 
 
-//---------------------------------- Automaton - Constructeurs - destructeur
+//---------------------------------- Automaton - Constructors & Destructor
 Automaton::Automaton(string input)
 {
     #ifdef MAP
-        cout << "Appel au constructeur de <Automaton>" << endl;
+        cout << "Call to the Constructor of <Automaton>" << endl;
     #endif
     this->lexer = new Lexer(move(input));
     E0 * initState = new E0();
@@ -120,7 +119,7 @@ Automaton::Automaton(string input)
 Automaton::~Automaton()
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Automaton>" << endl;
+    cout << "Call to the Destructor of <Automaton>" << endl;
 #endif
     delete (lexer);
     while (!stateStack.empty()) {

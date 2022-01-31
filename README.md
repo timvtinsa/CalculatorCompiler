@@ -17,12 +17,12 @@ This command allows to run the analyzer.
 It is also possible to add some options to this command :
 * `make run debug=true`
 
-The option *debug* activates the console display of calls to constructors and destructors
+The option *debug* activates the console Display of calls to constructors and destructors
 of objects.
 
 * `make run states=true`
 
-The option *states* activates the console display of the state path followed by the automaton.
+The option *states* activates the console Display of the state path followed by the automaton.
 
 * `make memory_check`
 

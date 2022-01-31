@@ -1,14 +1,14 @@
 /*************************************************************************
-               Automaton.h  - Interface de la classe Automaton
+                       CSVReader.h  - Interface
                          -------------------
 *************************************************************************/
 
 
-//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
+//--------- Interface of the class <Automaton> (file CSVReader.h) --------
 #ifndef CALCULATORCOMPILER_CSVREADER_H
 #define CALCULATORCOMPILER_CSVREADER_H
 
-//--------------------------------------------------- Interfaces utilisées
+//-------------------------------------------------------- Interfaces used
 using namespace std;
 #include <stack>
 #include <string>
@@ -21,29 +21,34 @@ using namespace std;
 typedef vector<string> CSVRow;
 typedef vector<CSVRow> CSVContent;
 
-//--------------------------------------- Définition de la classe Automaton
+//-------------------------------------- Definition of the class CSVReader
 class CSVReader {
+
+//----------------------------------------------------------------- PUBLIC
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     CSVRow readRow(int index);
+    // This method allows to read a specific row of the content of the
+    // CSV file.
 
     CSVRow getHeader() const;
+    // This method allows to read the header row of the CSV file.
 
     CSVContent getContent() const;
-//-------------------------------------------- Constructeurs - destructeur
+    // This method allows to get the content (attribute) of the CSV file.
+
+//---------------------------------------------- Constructors & Destructor
     CSVReader ( const CSVReader & CSVReader );
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
     explicit CSVReader(string filename, char delimiter);
-    // Mode d'emploi : Constructeur
+    // Constructor
 
     virtual ~CSVReader( );
-    // Mode d'emploi : Destructeur
+    // Destructor
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-//    static Expression* buildBinaryExpression( Entier * operand1,  Entier * operand2, const int & operatorId );
-//----------------------------------------------------- Attributs protégés
+//--------------------------------------------------- Protected attributes
     CSVRow header;
     CSVContent content;
     string filename;

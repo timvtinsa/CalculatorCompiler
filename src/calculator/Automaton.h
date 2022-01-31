@@ -1,14 +1,14 @@
 /*************************************************************************
-               Automaton.h  - Interface de la classe Automaton
+                       Automaton.h  - Interface
                          -------------------
 *************************************************************************/
 
 
-//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
+//------- Interface of the class <Automaton> (file Automaton.h) ----------
 #ifndef CALCULATORCOMPILER_AUTOMATON_H
 #define CALCULATORCOMPILER_AUTOMATON_H
 
-//--------------------------------------------------- Interfaces utilisées
+//-------------------------------------------------------- Interfaces used
 using namespace std;
 #include <stack>
 #include "Symbol.h"
@@ -21,34 +21,37 @@ class State;
 typedef stack<State*> StateStack;
 typedef stack<Symbol*> SymbolStack;
 
-//--------------------------------------- Définition de la classe Automaton
+//-------------------------------------- Definition of the class Automaton
 class Automaton {
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     void reduction(int n, Symbol *s);
+    // This method allows the automaton to do a "reduction" of n symbols
+    // from the symbol s.
 
-    void decalage(Symbol *s, State *e);
+    void shift(Symbol *s, State *e);
+    // This method allows the automaton to do a "shift" of a symbole s
+    // from the state e.
 
     int run();
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     Automaton ( const Automaton & Automate );
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
     explicit Automaton(string chaine);
-    // Mode d'emploi : Constructeur
+    // Constructor
 
     virtual ~Automaton ( );
-    // Mode d'emploi : Destructeur
+    // Destructor
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+//------------------------------------------------------ Protected methods
     static Expression* buildBinaryExpression( Entier * operand1,  Entier * operand2, const int & operatorId );
-//----------------------------------------------------- Attributs protégés
+//--------------------------------------------------- Protected attributes
     StateStack stateStack;
     SymbolStack symbolStack;
     Lexer* lexer;
 
 };
-
 
 #endif //CALCULATORCOMPILER_AUTOMATON_H

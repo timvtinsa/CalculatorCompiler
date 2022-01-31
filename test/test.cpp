@@ -1,5 +1,5 @@
 /*************************************************************************
-                 test.cpp  -  Fichier de test de l'automate
+                 test.cpp  -  file de test de l'automate
                              -------------------
 *************************************************************************/
 
@@ -8,13 +8,24 @@
 #include "../src/utils/CSVReader.h"
 
 //TODO Commenter le code
-//TODO Faire le readme
 
 int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
+// The following test takes one by one the lines of the CSV file
+// 'expressions.csv' (one line = one expression to test & its result)
+// and give the corresponding expression in input of the analyzer.
+// If the result of the evaluation of the expression is the same
+// as the result provided in the CSV file, then the test is OK for
+// this expression. The CSV file contains 1000 lines which corresponds
+// to 1000 expressions to test. If one of the evaluations is wrong
+// then the test fails.
+// NB : The test also include expressions with syntax error which
+// have to be detected by the analyzer.
+
 
 TEST(TestAutomaton, EvaluateExpression)
 {

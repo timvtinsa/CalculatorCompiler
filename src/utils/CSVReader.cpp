@@ -1,21 +1,21 @@
 /*************************************************************************
-                     Automaton  -  Réalisation de la classe
+                        CSVReader  -  Implementation
                              -------------------
 *************************************************************************/
 
-//---------- Réalisation de la classe <Automaton> (fichier Automaton.cpp) ------------
+//---- Implementation of the class <Automaton> (file Automaton.cpp) ------
 
 
-//-------------------------------------------------------- Include système
+//--------------------------------------------------------- System include
 using namespace std;
 #include <utility>
 #include <iostream>
 #include <regex>
 
-//------------------------------------------------------ Include personnel
+//------------------------------------------------------- Personal include
 #include "CSVReader.h"
 
-//------------------------------------------ CSVReader - Méthodes publiques
+//--------------------------------------------- CSVReader - Public methods
 
 CSVRow CSVReader::readRow(int index) {
     return this->content[index];
@@ -25,11 +25,15 @@ CSVRow CSVReader::getHeader() const {
     return this->header;
 }
 
-//---------------------------------- Automaton - Constructeurs - destructeur
+CSVContent CSVReader::getContent() const {
+    return this->content;
+}
+
+//---------------------------------- CSVReader - Constructors & Destructor
 CSVReader::CSVReader(string filename, char delimiter)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <CSVReader>" << endl;
+    cout << "Call to the Constructor of <CSVReader>" << endl;
 #endif
     this->filename = filename + ".csv";
     this->delimiter = delimiter;
@@ -64,19 +68,8 @@ CSVReader::CSVReader(string filename, char delimiter)
 CSVReader::~CSVReader()
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <CSVReader>" << endl;
+    cout << "Call to the Destructor of <CSVReader>" << endl;
 #endif
-//    delete (lexer);
-//    while (!stateStack.empty()) {
-//        delete (stateStack.top());
-//        stateStack.pop();
-//    }
-//    while (!symbolStack.empty()) {
-//        delete (symbolStack.top());
-//        symbolStack.pop();
-//    }
 }
 
-CSVContent CSVReader::getContent() const {
-    return this->content;
-}
+

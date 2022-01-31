@@ -1,43 +1,45 @@
 /*************************************************************************
-               Lexer.h  - Interface de la classe Lexer
+                         Lexer.h  - Interface
                          -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <Lexer> (fichier Lexer.h) ----------------
+//---------- Interface of the class <Lexer> (file Lexer.h) ---------------
 #pragma once
 
-//--------------------------------------------------- Interfaces utilisées
+//-------------------------------------------------------- Interfaces used
 using namespace std;
 #include <string>
 #include <utility>
 #include "Symbol.h"
 
-//------------------------------------------ Définition de la classe Lexer
+//------------------------------------------ Definition of the class Lexer
 class Lexer {
 
 public:
+//--------------------------------------------------------- Public methods
+    Symbol * Consult();
+    // This method allows to read a character of the arithmetic expression
+    // given in input.
 
-//-------------------------------------------- Constructeurs - destructeur
-    Lexer(const Lexer &aLexer);
-
-    explicit Lexer(string s) : flux(move(s)), tete(0), tampon(nullptr) {
-        #ifdef MAP
-                cout << "Appel au constructeur de <Lexer>" << endl;
-        #endif
-    }
+    void GoAhead();
+    // This method allows to set the buffer to nullptr.
 
     void putSymbol(Symbol *s);
+    // This method allows to put the symbol s into the buffer.
+
+//---------------------------------------------- Constructors & Destructor
+    Lexer(const Lexer &aLexer);
+    // Copy Constructor
+
+    explicit Lexer(string s);
+    // Constructor
 
     virtual ~Lexer();
-
-//----------------------------------------------------- Méthodes publiques
-
-    Symbol *Consulter();
-
-    void Avancer();
+    // Destructor
 
 protected:
-    string flux;
-    long unsigned int tete;
-    Symbol *tampon;
+//--------------------------------------------------- Protected attributes
+    string flow;
+    long unsigned int head;
+    Symbol *buffer;
 };

@@ -1,96 +1,81 @@
 /*************************************************************************
-               Expression.h  - Interface de la classe Expression
+                      Expression.h  - Interface
                          -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <Expression> (fichier Expresion.h) ----------------
+//---------- Interface of the class <Expression> (file Expresion.h) ----------------
 #ifndef CALCULATORCOMPILER_EXPRESSION_H
 #define CALCULATORCOMPILER_EXPRESSION_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces used
 using namespace std;
 #include <string>
 #include <vector>
 #include "Symbol.h"
 
-//------------------------------------- Définition de la classe Expression
+//------------------------------------- Definition of the class Expression
 class Expression : public Symbol {
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     Expression(const Symbol &aSymbole, const Expression &anExpression);
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
-    Expression() : Symbol(EXPR, false)
-    {
-#ifdef MAP
-        cout << "Appel au constructeur de <Expression>" << endl;
-#endif
-    }
-    // Mode d'emploi  : Constructeur
+    Expression();
+    // Constructor 1
 
-    Expression(Identificateurs id, bool isTerminal) : Symbol(id, isTerminal)
-    {
-#ifdef MAP
-        cout << "Appel au constructeur de <Expression>" << endl;
-#endif
-    }
+    Expression(Identificateurs id, bool isTerminal);
+    // Constructor 2
 
     ~Expression() override;
-    // Mode d'emploi : Destructeur
+    // Destructor
 
-//----------------------------------------------------- Méthodes publiques
-    virtual int eval() = 0;
+//--------------------------------------------------------- Public methods
+    virtual int Eval() = 0;
+    // This pure virtual method is redefined by all types of expression
+    // and allows to evaluate the expression which call the method.
 };
 
-//---------------------------------------- Définition de la classe Entier
+//----------------------------------------- Definition of the class Entier
 class Entier : public Expression {
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     Entier(const Symbol &sSymbole, const Entier &aEntier);
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
-    explicit Entier(int val) : Expression(), valeur(val)
-    {
-#ifdef MAP
-        cout << "Appel au constructeur de <Entier>" << endl;
-#endif
-    }
-    // Mode d'emploi  : Constructeur
+    explicit Entier(int val);
+    // Constructor
 
     ~Entier() override;
-    // Mode d'emploi : Destructeur
+    // Destructor
 
-//----------------------------------------------------- Méthodes publiques
-    virtual void Affiche();
+//--------------------------------------------------------- Public methods
+    virtual void Display();
+    // This method allows to Display the value of the object which call
+    // the method.
 
-    virtual int eval();
+    virtual int Eval();
 
 protected:
-//----------------------------------------------------- Attributs protégés
+//--------------------------------------------------- Protected attributes
     int valeur;
 };
 
 
-//------------------------------ Définition de la classe BinaryExpression
+//------------------------------- Definition of the class BinaryExpression
 class BinaryExpression : public Expression {
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     BinaryExpression(const BinaryExpression &aBinaryExpression);
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
-    BinaryExpression(Identificateurs opSymbol, Entier* opd1, Entier* opd2) : Expression(EXPR, false), operatorSymbole(opSymbol), operand1(opd1), operand2(opd2)
-    {
-#ifdef MAP
-        cout << "Appel au constructeur de <BinaryExpression>" << endl;
-#endif
-    }
-    // Mode d'emploi  : Constructeur
+    BinaryExpression(Identificateurs opSymbol, Entier* opd1, Entier* opd2);
+    // Constructor
 
     ~BinaryExpression() override;
-    // Mode d'emploi  : Destructeur
+    // Destructor
 
-//----------------------------------------------------- Méthodes publiques
-    virtual int eval() = 0;
+//--------------------------------------------------------- Public methods
+    virtual int Eval() = 0;
 
 protected:
     Identificateurs operatorSymbole;
@@ -98,44 +83,34 @@ protected:
     Entier* operand2;
 };
 
-//--------------------------------- Définition de la classe ExpressionPlus
+//--------------------------------- Definition of the class ExpressionPlus
 class ExpressionPlus : public BinaryExpression {
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     ExpressionPlus(const BinaryExpression &aBinaryExpression);
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
-    ExpressionPlus(Entier * opd1,  Entier * opd2) : BinaryExpression(PLUS, opd1, opd2)
-    {
-        #ifdef MAP
-                cout << "Appel au constructeur de <ExpressionPlus>" << endl;
-        #endif
-    }
-    // Mode d'emploi  : Constructeur
+    ExpressionPlus(Entier * opd1,  Entier * opd2);
+    // Constructor
 
     ~ExpressionPlus() override;
-    // Mode d'emploi  : Destructeur
-//----------------------------------------------------- Méthodes publiques
-    int eval() override;
+    // Destructor
+//--------------------------------------------------------- Public methods
+    int Eval() override;
 };
 
-//--------------------------------- Définition de la classe ExpressionMult
+//--------------------------------- Definition of the class ExpressionMult
 class ExpressionMult : public BinaryExpression {
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     ExpressionMult(const ExpressionMult &anExpressionMult);
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
-    ExpressionMult(Entier * opd1, Entier * opd2) : BinaryExpression(MULT, opd1, opd2)
-    {
-        #ifdef MAP
-                cout << "Appel au constructeur de <ExpressionMult>" << endl;
-        #endif
-    }
-    // Mode d'emploi  : Constructeur
+    ExpressionMult(Entier * opd1, Entier * opd2);
+    // Constructor
     ~ExpressionMult() override;
-//----------------------------------------------------- Méthodes publiques
-    int eval() override;
+//--------------------------------------------------------- Public methods
+    int Eval() override;
 };
 
 

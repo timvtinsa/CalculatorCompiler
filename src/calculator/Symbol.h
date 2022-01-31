@@ -1,16 +1,16 @@
 /*************************************************************************
-               Symbol.h  - Interface de la classe Symbol
+                        Symbol.h  - Interface
                          -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <Automaton> (fichier Automaton.h) ----------------
+//---------- Interface of the class <Automaton> (file Automaton.h) -------
 #pragma once
 
-//--------------------------------------------------- Interfaces utilisées
+//-------------------------------------------------------- Interfaces used
 using namespace std;
 #include <string>
 
-//------------------------------------------------------------- Constantes
+//-------------------------------------------------------------- Constants
 const string Etiquettes[] = {"OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR", "EXPR"};
 
 //------------------------------------------------------------------ Types
@@ -18,52 +18,60 @@ enum Identificateurs {
     OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR, EXPR
 };
 
-//---------------------------------------- Définition de la classe Symbol
+//----------------------------------------- Definition of the class Symbol
 class Symbol {
 public:
-//----------------------------------------------------- Méthodes publiques
-    virtual void Affiche();
+//--------------------------------------------------------- Public methods
+    virtual void Display();
+    // This method allows to Display a Symbole
 
-    virtual int eval();
+    virtual int Eval();
 
-    bool isTerminal() const { return terminal; }
+    bool IsTerminal() const { return terminal; }
+    // This method allows to know if the symbol which call the method is
+    // terminal. It is important to know if the symbol is a terminalor not
+    // in order to trigger the reading cursor during a shift operation.
 
-//------------------------------------------------- Surcharge d'opérateurs
+//---------------------------------------------------- Operator overloaded
     operator int() const { return ident; }
+    // Overloading the operator int() allows to cast implicitly a symbol
+    // into an integer, to get its identifier. This is convenient for the
+    // implementation of the transition methods.
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     Symbol (const Symbol & aSymbole );
-    // Mode d'emploi : Constructeur de copie
+    // Copy Constructor
 
     Symbol(int i, bool t);
-    // Mode d'emploi : Constructeur
+    // Constructor
 
     virtual ~Symbol();
-    // Mode d'emploi : Destructeur
+    // Destructor
 
 protected:
-//----------------------------------------------------- Attributs protégés
+//--------------------------------------------------- Protected attributes
     int ident;
     bool terminal;
 };
 
 
-//---------------------------------- Définition de la classe SymboleSimple
+//---------------------------------- Definition of the class SymboleSimple
 class EntierSimple : public Symbol {
 public:
-//----------------------------------------------------- Méthodes publiques
-    virtual int eval();
+//--------------------------------------------------------- Public methods
+    virtual int Eval();
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     EntierSimple (const EntierSimple & aEntierSimple );
-    // Mode d'emploi  : Constructeur de copie
+    // Copy Constructor
 
     explicit EntierSimple(int val);
+    // Constructor
 
     ~EntierSimple() override;
-    // Mode d'emploi : Destructeur
+    // Destructor
 
 protected:
-//----------------------------------------------------- Attributs protégés
+//--------------------------------------------------- Protected attributes
     int valeur;
 };

@@ -1,15 +1,15 @@
 /*************************************************************************
-                      State  -  Interface de la classe State
+                             State  -  Interface
                              -------------------
 *************************************************************************/
 
-//---------- Interface de la classe <State> (fichier State.h) et des classes Etats issues de la classe  ----------------
+//--- Interface of the class <State> and its descendants (file State.h) --
 #pragma once
 
 #ifndef CALCULATORCOMPILER_STATE_H
 #define CALCULATORCOMPILER_STATE_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces used
 using namespace std;
 #include <string>
 #include "Automaton.h"
@@ -22,144 +22,148 @@ class State {
 //----------------------------------------------------------------- PUBLIC
 public:
 
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     void print() const;
+    // This method allows to displays the name of the state which call the method.
 
     virtual bool transition(Automaton &automate, Symbol *s) = 0;
+    // This pure virtual method is redefined by all the states of the automaton
+    // and allows to realize the transition from the state that call the method
+    // to another state of the automaton with the symbol s.
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     State ( const State & Etat );
-    // Mode d'emploi : Constructeur de copie
+    // Copy Constructor
 
     State(string name);
-    // Mode d'emploi : Constructeur
+    // Constructor
 
     virtual ~State();
-    // Mode d'emploi : Destructeur
+    // Destructor
 
-//------------------------------------------------------------------ PROTEGE
+//---------------------------------------------------------------- PROTEGE
 protected:
     string name;
 };
 
 
-// Déclaration des différents états issus de la classe abstraite State
+//------ Declaration of the different states from the abstract class State
 
-//--------------------------------------------- Définition de la classe E0
+//--------------------------------------------- Definition of the class E0
 class E0 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s);
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E0();
 };
 
 
-//--------------------------------------------- Définition de la classe E1
+//--------------------------------------------- Definition of the class E1
 class E1 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E1();
 };
 
 
-//--------------------------------------------- Définition de la classe E2
+//--------------------------------------------- Definition of the class E2
 class E2 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E2();
 };
 
 
-//--------------------------------------------- Définition de la classe E3
+//--------------------------------------------- Definition of the class E3
 class E3 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E3();
 };
 
 
-//--------------------------------------------- Définition de la classe E4
+//--------------------------------------------- Definition of the class E4
 class E4 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E4();
 };
 
 
-//--------------------------------------------- Définition de la classe E5
+//--------------------------------------------- Definition of the class E5
 class E5 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E5();
 };
 
 
-//--------------------------------------------- Définition de la classe E6
+//--------------------------------------------- Definition of the class E6
 class E6 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E6();
 };
 
-//--------------------------------------------- Définition de la classe E7
+//--------------------------------------------- Definition of the class E7
 class E7 : public State {
 
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//----------------------------------------------------- Méthodes publiques
+//---------------------------------------------- Constructors & Destructor
     E7();
 };
 
 
-//--------------------------------------------- Définition de la classe E8
+//--------------------------------------------- Definition of the class E8
 class E8 : public State {
 
 public:
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     bool transition(Automaton &automate, Symbol *s) override;
 
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     E8();
 };
 
 
-//--------------------------------------------- Définition de la classe E9
+//--------------------------------------------- Definition of the class E9
 class E9 : public State {
 
 public:
-//----------------------------------------------------- Méthodes publiques
+//--------------------------------------------------------- Public methods
     bool transition(Automaton &automate, Symbol *s) override;
 
-//-------------------------------------------- Constructeurs - destructeur
+//---------------------------------------------- Constructors & Destructor
     E9();
 };
 

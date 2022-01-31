@@ -3,78 +3,77 @@
                              -------------------
 *************************************************************************/
 
-//-------------------------------------------------------- Include système
+//--------------------------------------------------------- System include
 #include <iostream>
-//------------------------------------------------------ Include personnel
+//------------------------------------------------------- Personal include
 #include "Lexer.h"
 
-//--------------------------------------------- Lexer - Méthodes publiques
-Symbol * Lexer::Consulter() {
-   if (!tampon) {
+//------------------------------------------------- Lexer - Public methods
+Symbol * Lexer::Consult() {
+   if (!buffer) {
 
-      if (tete == flux.length())
-         tampon = new Symbol(FIN, true);
+      if (head == flow.length())
+          buffer = new Symbol(FIN, true);
       else
       {
 
-         switch (flux[tete]) {
+         switch (flow[head]) {
             case '(':
-               tampon = new Symbol(OPENPAR, true);
-               tete++;
+                buffer = new Symbol(OPENPAR, true);
+               head++;
                break;
             case ')':
-               tampon = new Symbol(CLOSEPAR, true);
-               tete++;
+                buffer = new Symbol(CLOSEPAR, true);
+               head++;
                break;
             case '*':
-               tampon = new Symbol(MULT, true);
-               tete++;
+                buffer = new Symbol(MULT, true);
+               head++;
                break;
             case '+':
-               tampon = new Symbol(PLUS, true );
-               tete++;
+                buffer = new Symbol(PLUS, true );
+               head++;
                break;
             default:
-               if (flux[tete]<='9' && flux[tete]>='0') {
-                  int resultat = flux[tete]-'0';
+               if (flow[head] <= '9' && flow[head] >= '0') {
+                  int resultat = flow[head] - '0';
                   int i=1;
-                  while (flux[tete+i]<='9' && flux[tete+i]>='0') {
-                     resultat = resultat*10+(flux[tete+i]-'0');
+                  while (flow[head + i] <= '9' && flow[head + i] >= '0') {
+                     resultat = resultat*10+(flow[head + i] - '0');
                      i++;
                   }
-                  tete = tete+i;
-                  tampon = new EntierSimple(resultat);
+                   head = head + i;
+                   buffer = new EntierSimple(resultat);
                }
                else {
-                  tampon = new Symbol(ERREUR, true);
+                   buffer = new Symbol(ERREUR, true);
                }
          }
       }
    }
-   return tampon;
+   return buffer;
 }
 
-void Lexer::Avancer() {
-   tampon = nullptr;
+void Lexer::GoAhead() {
+    buffer = nullptr;
 }
 
 void Lexer::putSymbol(Symbol *s) {
-    tampon = s;
+    buffer = s;
 }
 
-//------------------------------------ Lexer - Constructeurs - destructeur
-Lexer::Lexer(const Lexer &aLexer)
-{
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <Lexer>" << endl;
-    #endif
+//-------------------------------------- Lexer - Constructors & Destructor
+Lexer::Lexer(string s) : flow(move(s)), head(0), buffer(nullptr) {
+#ifdef MAP
+    cout << "Call to the Constructor of <Lexer>" << endl;
+#endif
 }
 
 Lexer::~Lexer()
 {
-    #ifdef MAP
-        cout << "Appel au destructeur de <Lexer>" << endl;
-    #endif
-    delete(tampon);
+#ifdef MAP
+    cout << "Call to the Destructor of <Lexer>" << endl;
+#endif
+    delete(buffer);
 }
 
